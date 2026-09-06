@@ -1,0 +1,25 @@
+# 💰 Reporte de Arquitectura Técnica y Costos Cloud - FleetLogix
+
+**Evaluación de Componentes Elásticos y Presupuesto Mensual**  
+**Autora:** Camila Conde E. | *Infraestructura: Snowflake Cloud Data Warehouse*[cite: 10]  
+
+---
+
+## 1. Justificación de Decisiones de Arquitectura
+
+Para mitigar la saturación del sistema transaccional de **FleetLogix S.A.**, se optó por una **arquitectura desacoplada**[cite: 10]. El pipeline procesa las transformaciones pesadas en memoria local (Python Pandas) y delega a la nube únicamente la consolidación analítica[cite: 10]. 
+
+Se seleccionó **Snowflake** por su capacidad para separar de forma independiente el almacenamiento del cómputo, garantizando que las consultas de reportes gerenciales no afecten la velocidad operativa de la flota[cite: 10].
+
+---
+
+## 2. Estimación de Costos de Infraestructura Cloud (Mensual)
+
+Presupuesto operativo proyectado para soportar el almacenamiento analítico y el procesamiento de lotes diarios ($>1.2\text{M}$ de hechos de negocio)[cite: 10]:
+
+| Componente Cloud | Detalle del Recurso | Configuración / Tiempo | Costo Estimado Mensual |
+| :--- | :--- | :--- | :---: |
+| **Almacenamiento (Storage)** | Capacidad de disco persistente en la nube (Datos comprimidos)[cite: 10] | $\sim 50\text{ GB}$ de volumen mensualizado[cite: 10] | **USD $25.00**[cite: 10] |
+| **Cómputo Virtual (Compute)** | Virtual Warehouse XS ($1$ crédito por hora activa de ejecución)[cite: 10] | $2$ horas diarias (ETL + Reportes BI)[cite: 10] | **USD $180.00**[cite: 10] |
+| **Transferencia de Datos** | Ingesta masiva empaquetada desde origen local (*Data Ingestion*)[cite: 10] | Lote diario automatizado (*Batch*)[cite: 10] | **USD $0.00** *(Ingreso gratuito)*[cite: 10] |
+| **COSTO TOTAL ESTIMADO** | Presupuesto operativo base para FleetLogix S.A.[cite: 10] | Soporte elástico completo[cite: 10] | **USD $205.00 / mes**[cite: 10] |
